@@ -4,7 +4,11 @@ import com.meac.adi.entities.User;
 import com.meac.adi.entities.dtos.CreateUserDTO;
 import com.meac.adi.repositories.UserRepository;
 import jakarta.transaction.Transactional;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
+
+import java.util.UUID;
 
 @Service
 public class UserServices {
@@ -26,4 +30,9 @@ public class UserServices {
        return userRepository.save(newUser);
 
     }
+    public User getUser(UUID userId) {
+        return userRepository.findById(userId)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found!"));
+    }
+
 }
