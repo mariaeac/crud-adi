@@ -3,6 +3,7 @@ package com.meac.adi.controller;
 
 import com.meac.adi.entities.User;
 import com.meac.adi.entities.dtos.CreateUserDTO;
+import com.meac.adi.entities.dtos.ResponseUserDTO;
 import com.meac.adi.repositories.UserRepository;
 import com.meac.adi.services.UserServices;
 import org.springframework.http.ResponseEntity;
@@ -30,8 +31,8 @@ public class UserController {
    }
 
    @GetMapping("/{id}")
-    public ResponseEntity<User> getUser(@PathVariable("id") UUID userId) {
-        User user = userServices.getUser(userId);
+    public ResponseEntity<ResponseUserDTO> getUser(@PathVariable("id") UUID userId) {
+        ResponseUserDTO user = userServices.getUser(userId);
         return ResponseEntity.ok(user);
    }
 
@@ -47,6 +48,11 @@ public class UserController {
         return ResponseEntity.noContent().build();
    }
 
+   @PutMapping
+    public ResponseEntity<User> updateById(@RequestBody UpdateUserDTO updateUserDTO) {
+        User user = userServices.updateUser(updateUserDTO);
+        return ResponseEntity.ok().body(user);
+   }
 
 
 
