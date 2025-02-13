@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -33,5 +34,13 @@ public class UserController {
         User user = userServices.getUser(userId);
         return ResponseEntity.ok(user);
    }
+
+   @GetMapping
+    public ResponseEntity<List<User>> getAllUsers() {
+        List<User> users = userServices.getAllUsers();
+        return ResponseEntity.ok(users);
+   }
+
+
 
 }
