@@ -14,6 +14,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "user_id")
     private UUID userId;
+    @Column(unique = true, nullable = false, length = 30)
     private String username;
     private String email;
     private String password;
@@ -28,13 +29,12 @@ public class User {
 
     }
 
-    public User(UUID userId, String username, String email, String password, Instant createdAt, Instant updatedAt) {
+    public User(UUID userId, String username, String email, String password, Instant createdAt) {
         this.userId = userId;
         this.username = username;
         this.email = email;
         this.password = password;
         this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
     }
 
     public UUID getUserId() {
